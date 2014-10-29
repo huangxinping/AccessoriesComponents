@@ -34,22 +34,28 @@
         showInputBarSwitchMenu:(BOOL)shouldShowInputBarSwitchMenu               //3. 在会话窗口显示自定义菜单, 类似于微信的自定义菜单；
                                                                                 //      如果需要显示自定义菜单,请首先到管理后台分配自定义菜单,请分配且只分配三个自定义菜单,多于三个的自定义菜单将不予显示。
                                                                                 //      显示: YES, 不显示: NO
-                     withTitle:(NSString *)title;                               //4. 自定义会话窗户标题
+                     withTitle:(NSString *)title                                //4. 自定义会话窗户标题
+
+               withProductInfo:(NSString *)productInfo                          //5. 成功连接客服之后,自动将此消息发送给客服,
+                                                                                //   如果不需要发送此信息, 可将其设置为 nil 或者 ""
+    withLeftBarButtonItemColor:(UIColor *)color                                 //6. 导航左上角“结束会话”按钮颜色
+      hidesBottomBarWhenPushed:(BOOL)shouldHide;                                //7. 从具有Tabbar的viewController打开的时候,隐藏tabbar
+
 
 //4.1
 -(void)presentChatViewController:(UIViewController *)navController
                withWorkgroupName:(NSString *)workgroupName
       rightBarButtonItemCallback:(void (^)())rightBarButtonTouchUpInsideCallback
           showInputBarSwitchMenu:(BOOL)shouldShowInputBarSwitchMenu
-                       withTitle:(NSString *)title;
+                       withTitle:(NSString *)title
+                 withProductInfo:(NSString *)productInfo
+      withLeftBarButtonItemColor:(UIColor *)color
+        hidesBottomBarWhenPushed:(BOOL)shouldHide;
 
 //5.查询工作组当前在线状态，如果工作组内客服至少有一个客服账号在线，则显示在线。否则，显示离线
 -(void) queryWorkgroupOnlineStatus:(NSString *)workgroupname;
 
-//5.1 发送文字消息
--(void) sendTextMessage:(NSString*)content toKefuname:(NSString *)workgroupName;
-
-//5.2 清空与workgroupName的所有聊天信息
+//5.1 清空与workgroupName的所有聊天信息
 - (void) deleteMessagesWith:(NSString*)workgroupName;
 
 #pragma mark 用户标签
